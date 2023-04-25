@@ -44,7 +44,7 @@ class UserControllerTest {
     @Test
     @DisplayName("User更新画面")
     @WithMockUser
-    void testGetUser() throws Exception {
+    void testGetUser1() throws Exception {
         MvcResult result = mockMvc.perform(get("/user/update/1/"))
             .andExpect(status().isOk())
             .andExpect(model().attributeExists("user"))
@@ -55,5 +55,30 @@ class UserControllerTest {
         User user = (User)result.getModelAndView().getModel().get("user");
         assertEquals(user.getId(), 1);
         assertEquals(user.getName(), "キラメキ太郎");
+    }
+
+    void testGetUser2() throws Exception {
+        MvcResult result = mockMvc.perform(get("/user/update/2/"))
+            .andExpect(status().isOk())
+            .andExpect(model().attributeExists("user"))
+            .andExpect(model().hasNoErrors())
+            .andExpect(view().name("user/update"))
+            .andReturn();
+
+        User user = (User)result.getModelAndView().getModel().get("user");
+        assertEquals(user.getId(), 2);
+        assertEquals(user.getName(), "キラメキ次郎");
+    }
+    void testGetUser3() throws Exception {
+        MvcResult result = mockMvc.perform(get("/user/update/3/"))
+            .andExpect(status().isOk())
+            .andExpect(model().attributeExists("user"))
+            .andExpect(model().hasNoErrors())
+            .andExpect(view().name("user/update"))
+            .andReturn();
+
+        User user = (User)result.getModelAndView().getModel().get("user");
+        assertEquals(user.getId(), 2);
+        assertEquals(user.getName(), "キラメキ花子");
     }
 }
